@@ -1,67 +1,64 @@
 import { useState } from "react";
 import styles from "./UserData.module.scss";
-import {
-  Button,
-  Cascader,
-  DatePicker,
-  Form,
-  Input,
-  InputNumber,
-  Radio,
-  Select,
-  Switch,
-  TreeSelect,
-} from "antd";
-
-type SizeType = Parameters<typeof Form>[0]["size"];
+import { DatePicker, Form, Input, Select, Spin } from "antd";
+import { mainApi } from "@/api/servises";
+import type { IClientTypes } from "@/types";
 
 export const UserData = () => {
-  // const handleChange = (value: string) => {
-  //   console.log(`selected ${value}`);
-  // };
+  const { data: types, isLoading: isLoadingTypes } =
+    mainApi.useGetClientTypesQuery();
 
-  const [componentSize, setComponentSize] = useState<SizeType | "default">(
-    "default"
-  );
+  const [selectValue, setSelectValue] = useState<IClientTypes>({
+    id: 0,
+    key: "individual",
+    value: "Физическое лицо",
+  });
 
-  const onFormLayoutChange = ({ size }: { size: SizeType }) => {
-    setComponentSize(size);
+  const handleChange = (val: number) => {
+    setSelectValue({
+      ...selectValue,
+      id: val,
+    });
   };
+
+  if (isLoadingTypes) return <Spin />;
 
   return (
     <div className={styles.root}>
-      {/* <div className={styles.item}>
-        <span>Тип: </span>
-        <Select
-          defaultValue="lucy"
-          style={{ width: 120 }}
-          onChange={handleChange}
-          options={[
-            { value: "jack", label: "Jack" },
-            { value: "lucy", label: "Lucy" },
-            { value: "Yiminghe", label: "yiminghe" },
-            // { value: "disabled", label: "Disabled", disabled: true },
-          ]}
-        />
-      </div> */}
       <Form
         labelCol={{ span: 40 }}
-        wrapperCol={{ span: 14 }}
+        wrapperCol={{ span: 140 }}
         layout="horizontal"
-        initialValues={{ size: componentSize }}
-        onValuesChange={onFormLayoutChange}
-        size={componentSize as SizeType}
-        // style={{ width: "fit-content" }}
       >
-        <Form.Item label="Select">
-          <Select>
-            <Select.Option value="demo">Demo</Select.Option>
+        <Form.Item label="Тип">
+          <Select onChange={handleChange}>
+            {types?.map((el) => (
+              <Select.Option value={el.id} key={el.id}>
+                {el.value}
+              </Select.Option>
+            ))}
           </Select>
         </Form.Item>
-        <Form.Item label="Input">
+        <Form.Item
+          label={
+            selectValue.key === "individual" ? "ФИО" : "Название организации"
+          }
+        >
           <Input />
         </Form.Item>
-        <Form.Item label="DatePicker">
+        <Form.Item label="Лимит">
+          <Input />
+        </Form.Item>
+        <Form.Item label="Email">
+          <Input />
+        </Form.Item>
+        <Form.Item label="Телефон">
+          <Input />
+        </Form.Item>
+        <Form.Item label="Адрес">
+          <Input />
+        </Form.Item>
+        <Form.Item label="Дата рождения">
           <DatePicker />
         </Form.Item>
       </Form>
