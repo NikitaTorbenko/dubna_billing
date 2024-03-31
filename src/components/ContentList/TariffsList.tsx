@@ -1,3 +1,4 @@
+import styles from "./ContentList.module.scss";
 import { List, Spin } from "antd";
 import { mainApi } from "@/api/servises";
 
@@ -10,22 +11,18 @@ export const TariffsList = () => {
 
   return (
     <List
-      style={{ width: "100%" }}
+      className={styles.list}
       header={<div>Header</div>}
       bordered
       dataSource={data}
       renderItem={(item) => (
         <List.Item>
-          <div>id: {item.id}</div>
-          {/* <div>name: {item.name}</div>
-          <div>balance: {item.balance}</div>
-          <div>limit: {item.limit}</div>
-          <div>address: {item.address}</div>
-          <div>email: {item.email}</div>
-          <div>phone: {item.phone}</div>
-          <div>birth date: {item.birth_date}</div>
-          <div>status: {item.status.value}</div> */}
-          <div>type: {item.type.value}</div>
+          <div>
+            <div>id: {item.id}</div>
+            <div>period: {item.period}</div>
+            <div>price: {item.price}</div>
+            <div>type: {item.type.value}</div>
+          </div>
         </List.Item>
       )}
     />

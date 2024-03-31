@@ -1,5 +1,6 @@
 import styles from "./ContentList.module.scss";
 import { List, Spin } from "antd";
+import { PlusCircleOutlined } from "@ant-design/icons";
 import { mainApi } from "@/api/servises";
 
 export const ClientsList = () => {
@@ -12,7 +13,11 @@ export const ClientsList = () => {
   return (
     <List
       className={styles.list}
-      header={<div>Header</div>}
+      header={
+        <div className={styles.wrapPlus}>
+          <PlusCircleOutlined className={styles.plus} />
+        </div>
+      }
       bordered
       dataSource={data}
       renderItem={(item) => (

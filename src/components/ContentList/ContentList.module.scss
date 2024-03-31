@@ -1,3 +1,15 @@
 .list {
-  width: 50%;
+  margin-top: 20px;
+  min-width: fit-content;
+}
+
+.wrapPlus {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.plus {
+  cursor: pointer;
+  padding: 3px;
 }
