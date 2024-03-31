@@ -53,13 +53,13 @@ export const UserData = () => {
         size={componentSize as SizeType}
         // style={{ width: "fit-content" }}
       >
-        <Form.Item label="Input">
-          <Input />
-        </Form.Item>
         <Form.Item label="Select">
           <Select>
             <Select.Option value="demo">Demo</Select.Option>
           </Select>
+        </Form.Item>
+        <Form.Item label="Input">
+          <Input />
         </Form.Item>
         <Form.Item label="DatePicker">
           <DatePicker />
