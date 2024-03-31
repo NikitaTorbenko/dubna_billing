@@ -3,19 +3,24 @@ import { List, Spin } from "antd";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import { mainApi } from "@/api/servises";
 
-export const ClientsList = () => {
+interface ClientsListProps {
+  setIsActivePlus: (val: boolean) => void;
+}
+
+export const ClientsList = ({ setIsActivePlus }: ClientsListProps) => {
   const { data, isLoading } = mainApi.useGetClientsQuery();
 
   if (isLoading) return <Spin />;
-
-  console.log(data);
 
   return (
     <List
       className={styles.list}
       header={
         <div className={styles.wrapPlus}>
-          <PlusCircleOutlined className={styles.plus} />
+          <PlusCircleOutlined
+            onClick={() => setIsActivePlus(true)}
+            className={styles.plus}
+          />
         </div>
       }
       bordered

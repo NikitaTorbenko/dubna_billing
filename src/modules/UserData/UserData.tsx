@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from "./UserData.module.scss";
-import { DatePicker, Form, Input, Select, Spin } from "antd";
+import { DatePicker, Form, Input, Button, Select, Spin } from "antd";
 import { mainApi } from "@/api/servises";
 import type { IClientTypes } from "@/types";
 
@@ -60,6 +60,9 @@ export const UserData = () => {
         </Form.Item>
         <Form.Item label="Дата рождения">
           <DatePicker />
+        </Form.Item>
+        <Form.Item label="Создать">
+          <Button onClick={() => {}}>Создать</Button>
         </Form.Item>
       </Form>
     </div>

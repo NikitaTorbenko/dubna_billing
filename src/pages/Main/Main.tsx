@@ -6,6 +6,7 @@ import { ClientsList, TariffsList } from "@/components/ContentList";
 import { UserData } from "@/modules/UserData";
 
 export const Main = () => {
+  const [isActivePlus, setIsActivePlus] = useState(false);
   const [value, setValue] = useState("");
   const [currentSelection, setCurrentSelection] = useState(0);
 
@@ -19,8 +20,12 @@ export const Main = () => {
           onChange={(e) => setValue(e.target.value)}
         />
         <div className={styles.main}>
-          {currentSelection === 0 ? <ClientsList /> : <TariffsList />}
-          <UserData />
+          {currentSelection === 0 ? (
+            <ClientsList setIsActivePlus={setIsActivePlus} />
+          ) : (
+            <TariffsList />
+          )}
+          {isActivePlus && <UserData />}
         </div>
       </div>
     </div>
